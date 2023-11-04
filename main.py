@@ -28,6 +28,7 @@ class IPCheckResponse(BaseModel):
 async def check_ip_path(ip: str):
     try:
         network_range = ipaddress.ip_network('17.0.0.0/8', strict=False)
+        ip_obj = ipaddress.ip_address(ip)
         is_in_network = ip_obj in network_range
         is_in_range = "good" if is_in_network else "not good"
         return {"ip": ip, "is_in_range": is_in_range}
